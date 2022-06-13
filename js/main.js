@@ -1,3 +1,5 @@
+//Источник: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -6,12 +8,11 @@ function getRandomIntInclusive(min, max) {
 
 getRandomIntInclusive(2, 14);
 
-//Источник: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-
+//Источник: https://qna.habr.com/q/999157
 
 function getRandomArbitrary(min, max, maxCommas = 0) {
   if (min > max || min < 0 || max <= 0) {
-    return ('Задан неверный диапазон! Укажите другие числа.');
+    throw new RangeError('Задан неверный диапазон! Укажите другие числа.');
   }
 
   const digitsDegree = 10 ** maxCommas;
@@ -19,5 +20,3 @@ function getRandomArbitrary(min, max, maxCommas = 0) {
 }
 
 getRandomArbitrary(1, 2, 6);
-
-//Источник: https://qna.habr.com/q/999157
