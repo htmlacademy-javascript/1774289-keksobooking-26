@@ -1,8 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Жанна Халбекова](https://up.htmlacademy.ru/javascript/26/user/1774289).
-* Наставник: Андрей Ефимов. (https://up.htmlacademy.ru/profession/frontender/13/htmlcss/33/user/367335)
-
+* Наставник: [Андрей Ефимов](https://up.htmlacademy.ru/javascript/26/user/367335).
 ---
 
 _Не удаляйте и не изменяйте самовольно файлы и папки:_
