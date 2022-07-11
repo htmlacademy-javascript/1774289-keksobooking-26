@@ -1,13 +1,13 @@
-import { COORD_AMOUNT, OFFERS_COUNT } from './data.js';
 import {
   LatRange,
   LngRange,
   PriceRange,
   RoomsRange,
   GuestsRange,
+  offerType,
+  COORD_AMOUNT,
   CHECKIN,
   CHECKOUT,
-  TYPES,
   FEATURES,
   PHOTOS
 } from './data.js';
@@ -28,25 +28,25 @@ export const getRandomOffer = (_item, i) => {
   };
 
   return {
-    address: `${location.lat}, ${location.lng}`,
     author: {
       avatar: `img/avatars/user${formatNumberWithLeadZero(index)}.png`
     },
-    description: 'This room has one sofa and a round coffee table',
-    price: getRandomIntInclusive(PriceRange.MIN, PriceRange.MAX),
-    location,
-    photos: getRandomArrayPart(PHOTOS),
-    type: getRandomArrayElement(TYPES),
-    rooms: getRandomIntInclusive(RoomsRange.MIN, RoomsRange.MAX),
-    guests: getRandomIntInclusive(GuestsRange.MIN, GuestsRange.MAX),
-    checkin: getRandomArrayElement(CHECKIN),
-    checkout: getRandomArrayElement(CHECKOUT),
-    features: getRandomArrayPart(FEATURES),
-    title: 'Hello world!'
+    offer: {
+      address: `${location.lat}, ${location.lng}`,
+      description: 'This room has one sofa and a round coffee table',
+      price: getRandomIntInclusive(PriceRange.MIN, PriceRange.MAX),
+      location,
+      photos: getRandomArrayPart(PHOTOS),
+      type: getRandomArrayElement(Object.keys(offerType)),
+      rooms: getRandomIntInclusive(RoomsRange.MIN, RoomsRange.MAX),
+      guests: getRandomIntInclusive(GuestsRange.MIN, GuestsRange.MAX),
+      checkin: getRandomArrayElement(CHECKIN),
+      checkout: getRandomArrayElement(CHECKOUT),
+      features: getRandomArrayPart(FEATURES),
+      title: 'Hello world!'
+    },
+    location
   };
 };
 
 export const getRandomOffers = (length) => Array.from({ length }, getRandomOffer);
-
-export const offers = getRandomOffers(OFFERS_COUNT);
-//console.log(offers);
