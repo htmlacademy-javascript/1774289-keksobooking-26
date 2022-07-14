@@ -70,3 +70,12 @@ export const getWordAfterNum = (num, [form1, form2 = form1, form3 = form2]) => {
 
   return form2;
 };
+
+export const toggleForm = (active, formElement, disabledClass) => {
+  const classMethod = active ? 'remove' : 'add';
+  formElement.classList[classMethod](disabledClass);
+
+  formElement.querySelectorAll('fieldset').forEach((fieldset) => {
+    fieldset.disabled = !active;
+  });
+};
