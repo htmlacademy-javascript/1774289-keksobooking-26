@@ -1,5 +1,5 @@
 import { offerType } from './data.js';
-import { getElementFiller, getWordAfterNum } from './util.js';
+import { getElementFiller, getWordAfterNum } from './utils.js';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 const photoTemplate = cardTemplate.querySelector('.popup__photo');

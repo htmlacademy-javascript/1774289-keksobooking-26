@@ -18,7 +18,7 @@ import {
   formatNumberWithLeadZero,
   getRandomArrayElement,
   getRandomArrayPart
-} from './util.js';
+} from './utils.js';
 
 export const getRandomOffer = (_item, i) => {
   const index = i + 1;
