@@ -28,11 +28,26 @@ const CHECKIN = ['12:00', '13:00', '14:00'];
 const CHECKOUT = ['12:00', '13:00', '14:00'];
 
 const offerType = {
-  flat: 'Квартира',
-  bungalow: 'Бунгало',
-  house: 'Дом',
-  palace: 'Дворец',
-  hotel: 'Отель'
+  palace: {
+    title: 'Дворец',
+    min: 10000,
+  },
+  flat: {
+    title: 'Квартира',
+    min: 1000,
+  },
+  house: {
+    title: 'Дом',
+    min: 5000,
+  },
+  bungalow: {
+    title: 'Бунгало',
+    min: 0,
+  },
+  hotel: {
+    title: 'Отель',
+    min: 3000,
+  },
 };
 
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
@@ -43,9 +58,18 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
+const RoomToGuests = {
+  1: ['1'],
+  2: ['1', '2'],
+  3: ['1', '2', '3'],
+  100: ['0'],
+};
+
 const COORD_AMOUNT = 5;
 
 const OFFERS_COUNT = 10;
+
+const MAX_PRICE = 100000;
 
 export {
   LatRange,
@@ -54,10 +78,12 @@ export {
   RoomsRange,
   GuestsRange,
   offerType,
+  RoomToGuests,
   CHECKIN,
   CHECKOUT,
   FEATURES,
   PHOTOS,
   COORD_AMOUNT,
-  OFFERS_COUNT
+  OFFERS_COUNT,
+  MAX_PRICE
 };

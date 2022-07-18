@@ -71,6 +71,7 @@ export const getWordAfterNum = (num, [form1, form2 = form1, form3 = form2]) => {
   return form2;
 };
 
+// Функция активации и деактивации
 export const toggleForm = (active, formElement, disabledClassName) => {
   const classMethod = active ? 'remove' : 'add';
   formElement.classList[classMethod](disabledClassName);
@@ -79,9 +80,3 @@ export const toggleForm = (active, formElement, disabledClassName) => {
     fieldset.disabled = !active;
   });
 };
-
-// Функция деактивации
-// export const toggleFormDeactivation = (deactivation, element, disabledClassName) => {
-//   const classMethod = deactivation ? 'remove' : 'add';
-//   element.classList[classMethod](disabledClassName);
-// };

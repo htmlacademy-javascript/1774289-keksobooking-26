@@ -2,6 +2,7 @@ import { getRandomOffers } from './random-offers.js';
 import { generateCard } from './offer-card.js';
 import { toggleParamsForm } from './ad-form.js';
 import { toggleMapParams } from './map-params.js';
+import './slider.js';
 
 const WAIT_TIME = 2000;
 const OFFERS_COUNT = 1;
