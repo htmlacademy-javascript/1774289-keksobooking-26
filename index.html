@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="nouislider/nouislider.css">
+  <link rel="stylesheet" href="leaflet/leaflet.css">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -109,7 +110,7 @@
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
-          <input class="ad-form__value" id="price" name="price" type="number" placeholder="5000" minlength="0" maxlength="100 000" required>
+          <input class="ad-form__value" id="price" name="price" type="number" placeholder="5000" min="0" max="100000" required>
           <div class="ad-form__slider"></div>
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--time">
@@ -166,7 +167,7 @@
           <label class="ad-form__label">Фотография жилья</label>
           <div class="ad-form__photo-container">
             <div class="ad-form__upload">
-              <input type="file" id="images" name="images" class="ad-form__input visually-hidden" required>
+              <input type="file" id="images" name="images" class="ad-form__input visually-hidden">
               <label for="images" class="ad-form__drop-zone">Загрузить<br>фото...</label>
             </div>
             <div class="ad-form__photo"></div>
@@ -235,6 +236,7 @@
 
   <script src="pristine/pristine.min.js"></script>
   <script src="nouislider/nouislider.js"></script>
+  <script src="leaflet/leaflet.js"></script>
   <script src="js/main.js" type="module"></script>
 </body>
 </html>
