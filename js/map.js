@@ -4,8 +4,8 @@ const ZOOM = 13;
 const PIN_SIZE = 40;
 const MAIN_PIN_SIZE = 52;
 const PIN_RATIO = 0.5;
-// const LAYER_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-// const LAYER_COPY = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+const LAYER_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+const LAYER_COPY = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const MAIN_LOCATION = {
   lat: 35.68950,
   lng: 139.69171,
@@ -61,12 +61,4 @@ export const renderMap = (data, createBaloon, loadHandler) => {
   map.setView(MAIN_LOCATION, ZOOM);
 };
 
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  },
-).addTo(map);
-// L.tileLayer(LAYER_URL, { attribution: LAYER_COPY }).addTo(map);
-
-
+L.tileLayer(LAYER_URL, { attribution: LAYER_COPY }).addTo(map);
