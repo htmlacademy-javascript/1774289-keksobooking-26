@@ -1,4 +1,5 @@
 const PLURAL_THRESHOLD = 5;
+const COORD_DECIMALS = 5;
 
 //Источник: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 export const getRandomIntInclusive = (min, max) => {
@@ -80,3 +81,5 @@ export const toggleForm = (active, formElement, disabledClassName) => {
     fieldset.disabled = !active;
   });
 };
+
+export const getLocationString = ({ lat, lng }) => `${lat.toFixed(COORD_DECIMALS)}, ${lng.toFixed(COORD_DECIMALS)}`;

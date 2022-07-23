@@ -1,25 +1,65 @@
-import { getRandomOffers } from './random-offers.js';
-import { OFFERS_COUNT } from './data.js';
-import { generateCard } from './offer-card.js';
+import { getLocationString } from './utils.js';
 
+const ZOOM = 13;
+const PIN_SIZE = 40;
+const MAIN_PIN_SIZE = 52;
+const PIN_RATIO = 0.5;
+// const LAYER_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+// const LAYER_COPY = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const MAIN_LOCATION = {
   lat: 35.68950,
   lng: 139.69171,
 };
 
-const ZOOM = {
-  lat: 35.68950,
-  lng: 139.69171,
+let isInitiated = false;
+
+const map = L.map('map-canvas');
+const markerGroup = L.layerGroup().addTo(map);
+
+const setPin = (size, filename) => L.icon({
+  iconUrl: `./img/${filename}.svg`,
+  iconSize: [size, size],
+  iconAnchor: [size * PIN_RATIO, size],
+});
+
+const mainPinMarker = L.marker(MAIN_LOCATION, {
+  draggable: true,
+  icon: setPin(MAIN_PIN_SIZE, 'main-pin')
+}).addTo(map);
+
+mainPinMarker.addTo(map);
+
+export const createMarker = (createTemplate) => (item) => {
+  L.marker(item.location, {
+    icon: setPin(PIN_SIZE, 'pin')
+  })
+    .addTo(markerGroup)
+    .bindPopup(createTemplate(item));
 };
 
-const map = L.map('map-canvas')
-  .on('load', () => {
-    //console.log('Карта инициализирована');
-  })
-  .setView({
-    lat: 35.68950,
-    lng: 139.69171,
-  }, 10);
+export const addMapHandlers = (addressElement) => {
+  mainPinMarker.on('moveend', (evt) => {
+    addressElement.valu = getLocationString(evt.target.getLatLng());
+  });
+};
+
+export const resetMap = () => {
+  mainPinMarker.setLatLng(MAIN_LOCATION);
+  map.closePopup().setView(MAIN_LOCATION, ZOOM);
+};
+
+export const renderMap = (data, createBaloon, loadHandler) => {
+  if (isInitiated) {
+    markerGroup.clearLayers();
+    loadHandler();
+  } else {
+    isInitiated = true;
+    map.on('load', loadHandler);
+  }
+
+  data.forEach(createMarker(createBaloon));
+  map.setView(MAIN_LOCATION, ZOOM);
+};
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -27,97 +67,6 @@ L.tileLayer(
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
 ).addTo(map);
+// L.tileLayer(LAYER_URL, { attribution: LAYER_COPY }).addTo(map);
 
-const pinIcon = L.icon({
-  iconUrl: './img/pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [16, 40],
-});
 
-// const markerGroup = L.layerGroup().addTo(map);
-
-const cards = getRandomOffers(OFFERS_COUNT);
-
-export const createMarker = (point) => {
-  const {offer: { title }, location: { lat, lng }} = point;
-  const marker = L.marker(
-    {
-      title,
-      lat,
-      lng,
-    },
-    {
-      pinIcon,
-    },
-  );
-
-  marker
-    .addTo(map)
-    .bindPopup(generateCard(point));
-};
-
-cards.forEach(createMarker);
-
-// const points;
-
-// points.slice(0, points.length / 2).forEach((point) => {
-//   createMarker(point);
-// });
-
-// nextButton.addEventListener('click', () => {
-//   markerGroup.clearLayers();
-//   points.slice(points.length / 2).forEach((point) => {
-//     createMarker(point);
-//   });
-//   nextButton.remove();
-// });
-
-// markerGroup.clearLayers();
-
-const markerMain = L.marker(
-  {
-    lat: 35.68950,
-    lng: 139.69135,
-  },
-  {
-    draggable: true,
-  },
-);
-
-markerMain.addTo(map);
-
-const mainPinIcon = L.icon({
-  iconUrl: './img/main-pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [16, 40],
-});
-
-const mainPinMarker = L.marker(
-  {
-    lat: 35.68950,
-    lng: 139.69171,
-  },
-  {
-    icon: mainPinIcon,
-  },
-);
-
-mainPinMarker.addTo(map);
-
-// resetButton.addEventListener('click', () => {
-//   mainPinMarker.setLatLng({
-//     lat: 35.68950,
-//     lng: 139.69171,
-//   });
-// });
-
-// mainPinMarker.on('moveend', (evt) => {
-//   console.log(evt.target.getLatLng());
-// });
-
-mainPinMarker.remove();
-
-export const resetMap = () => {
-  mainPinMarker.setLatLng(MAIN_LOCATION);
-  map.setView(MAIN_LOCATION, ZOOM);
-};
