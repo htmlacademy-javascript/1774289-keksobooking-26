@@ -43,7 +43,7 @@ export const getRandomOffer = (_item, i) => {
       checkin: getRandomArrayElement(CHECKIN),
       checkout: getRandomArrayElement(CHECKOUT),
       features: getRandomArrayPart(FEATURES),
-      title: 'Hello world!'
+      title: 'Пользователь'
     },
     location
   };

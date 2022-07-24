@@ -2,18 +2,17 @@ import { getRandomOffers } from './random-offers.js';
 import { generateCard } from './offer-card.js';
 import { toggleParamsForm } from './ad-form.js';
 import { toggleMapParams } from './map-params.js';
+import { renderMap } from './map.js';
 
 const WAIT_TIME = 2000;
-const OFFERS_COUNT = 1;
+const OFFERS_COUNT = 10;
 
 toggleParamsForm();
 toggleMapParams();
 
 setTimeout(() => {
-  getRandomOffers(OFFERS_COUNT).forEach((offer) => {
-    document.querySelector('#map-canvas').append(generateCard(offer));
+  renderMap(getRandomOffers(OFFERS_COUNT), generateCard, () => {
+    toggleParamsForm(true);
+    toggleMapParams(true);
   });
-
-  toggleParamsForm(true);
-  toggleMapParams(true);
 }, WAIT_TIME);
