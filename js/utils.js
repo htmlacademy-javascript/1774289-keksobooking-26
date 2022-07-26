@@ -37,7 +37,7 @@ export const getRandomArrayPart = (arr) => {
 };
 
 // Создаёт функцию, генерирующую DOM-узел, заполненный контентом
-export const getElementFiller = (template) => (selector, data, createChildElement) => {
+export const getElementFiller = (template) => (selector, data = '', createChildElement) => {
   const element = template.querySelector(selector);
   const content = data.toString();
 

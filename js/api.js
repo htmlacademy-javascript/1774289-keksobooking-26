@@ -11,22 +11,22 @@ const handlePostError = () => {
   createPopup('ERROR_POST');
 };
 
-export const getData = () => {
+export const getData = () =>
   fetch(`${SERVER}/data`, {
     method: 'GET',
     credentials: 'same-origin'
   })
-    .then((res) => {
-      const { ok = false } = res;
+    .then((response) => {
+      const { ok = false } = response;
 
       if (ok) {
-        return res.json();
+        return response.json();
       }
 
       return handleFetchError();
     })
     .catch(handleFetchError);
-};
+
 
 export const sendData = (body, onSuccess ) =>
   fetch(SERVER, {
