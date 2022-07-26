@@ -72,6 +72,10 @@ export const getWordAfterNum = (num, [form1, form2 = form1, form3 = form2]) => {
   return form2;
 };
 
+export const getLocationString = ({ lat, lng }) => `${lat.toFixed(COORD_DECIMALS)}, ${lng.toFixed(COORD_DECIMALS)}`;
+
+export const isEscapeKeyPressed = (evt) => evt.key === 'Escape';
+
 // Функция активации и деактивации
 export const toggleForm = (active, formElement, disabledClassName) => {
   const classMethod = active ? 'remove' : 'add';
@@ -82,4 +86,10 @@ export const toggleForm = (active, formElement, disabledClassName) => {
   });
 };
 
-export const getLocationString = ({ lat, lng }) => `${lat.toFixed(COORD_DECIMALS)}, ${lng.toFixed(COORD_DECIMALS)}`;
+export const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
