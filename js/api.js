@@ -7,7 +7,7 @@ const handleFetchError = () => {
   return [];
 };
 
-const onFail = () => {
+const handlePostError = () => {
   createPopup('ERROR_POST');
 };
 
@@ -38,8 +38,7 @@ export const sendData = (body, onSuccess ) =>
         onSuccess();
         createPopup('SUCCESS');
       } else {
-        onFail();
+        handlePostError();
       }
     })
-    .catch(onFail);
-// 'Не удалось отправить форму. Попробуйте ещё раз'
+    .catch(handlePostError);

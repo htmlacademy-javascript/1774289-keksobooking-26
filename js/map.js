@@ -7,8 +7,8 @@ const PIN_RATIO = 0.5;
 const LAYER_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const LAYER_COPY = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const MAIN_LOCATION = {
-  lat: 35.68950,
-  lng: 139.69171,
+  lat: 35.68435,
+  lng:  139.75399,
 };
 
 let isInitiated = false;
@@ -39,7 +39,7 @@ export const createMarker = (createTemplate) => (item) => {
 
 export const addMapHandlers = (addressElement) => {
   mainPinMarker.on('moveend', (evt) => {
-    addressElement.valu = getLocationString(evt.target.getLatLng());
+    addressElement.value = getLocationString(evt.target.getLatLng());
   });
 };
 

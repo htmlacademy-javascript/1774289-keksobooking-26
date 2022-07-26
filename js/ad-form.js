@@ -10,7 +10,7 @@ import { initImageControl } from './image.js';
 const PRICE_PRIORITY = 1000;
 const PARAMS_DISABLED_CLASSNAME = 'ad-form--disabled';
 
-const adFormElement =  document.querySelector('.ad-form');
+const adFormElement = document.querySelector('.ad-form');
 const addressElement = adFormElement.querySelector('#address');
 const submitElement = adFormElement.querySelector('.ad-form__submit');
 const sliderElement = adFormElement.querySelector('.ad-form__slider');
@@ -31,7 +31,7 @@ const clearOfferImage = initImageControl(offerImageInputElement, offerImagePrevi
 
 const initialType = typeFieldElement.value;
 
-export const resetMapHandler = addMapHandlers(addressElement);
+addMapHandlers(addressElement);
 
 const validatePrice = (value) => {
   const price = parseInt(value, 10) || 0;
@@ -126,21 +126,22 @@ adFormElement.addEventListener('submit', (evt) => {
   });
 });
 
-export const setUserFormSubmit = (onSuccess) => {
-  submitElement.addEventListener('click', (evt) => {
-    evt.preventDefault();
+submitElement.addEventListener('click', (evt) => {
+  evt.preventDefault();
 
-    const isValid = pristine.validate();
-    if (isValid) {
-      sendData(
-        () => onSuccess(),
-        new FormData(evt.target),
-      );
-    }
+  const isValid = pristine.validate();
+  if (isValid) {
     submitElement.disabled = true;
-    adFormElement.submit();
-  });
-};
+
+    sendData(
+      () => {
+        adFormElement.reset();
+        submitElement.disabled = false;
+      },
+      new FormData(adFormElement),
+    );
+  }
+});
 
 adFormElement.addEventListener('reset', () => {
   clearAvatar();

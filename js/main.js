@@ -1,26 +1,15 @@
 import { getRandomOffers } from './random-offers.js';
 import { generateCard } from './offer-card.js';
-import { toggleParamsForm } from './ad-form.js';
-import { toggleMapParams } from './map-params.js';
-import { renderMap, addMapHandlers } from './map.js';
-import { setUserFormSubmit } from './ad-form.js';
+import { renderMap } from './map.js';
 import { getData } from './api.js';
-import './image.js';
+import { togglePage } from './page.js';
 
-const WAIT_TIME = 2000;
 const OFFERS_COUNT = 10;
 
-toggleParamsForm();
-toggleMapParams();
+togglePage();
 
-getData(
-  setTimeout(() => {
-    renderMap(getRandomOffers(OFFERS_COUNT), generateCard, () => {
-      toggleParamsForm(true);
-      toggleMapParams(true);
-      addMapHandlers(true);
-    });
-  }, WAIT_TIME)
-);
-
-setUserFormSubmit();
+getData(() => {
+  renderMap(getRandomOffers(OFFERS_COUNT), generateCard, () => {
+    togglePage(true);
+  });
+});
