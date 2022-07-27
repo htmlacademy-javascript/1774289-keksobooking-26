@@ -12,7 +12,6 @@ const PARAMS_DISABLED_CLASSNAME = 'ad-form--disabled';
 
 const adFormElement = document.querySelector('.ad-form');
 const addressElement = adFormElement.querySelector('#address');
-const submitElement = adFormElement.querySelector('.ad-form__submit');
 const sliderElement = adFormElement.querySelector('.ad-form__slider');
 const roomsFieldElement = adFormElement.querySelector('[name="rooms"]');
 const capacityFieldElement = adFormElement.querySelector('[name="capacity"]');
@@ -44,7 +43,7 @@ const validateCapacity = () => RoomToGuests[roomsFieldElement.value].includes(ca
 // Валидация кол-во комнат и кол-во гостей
 const getCapacityErrorMessage = () => {
   const { value } = roomsFieldElement;
-  const rooms = `${value} ${getWordAfterNum['комнаты', 'комнат']}`;
+  const rooms = `${value} ${getWordAfterNum(parseInt(value, 10), ['комнаты', 'комнат'])}`;
   const validGuests = RoomToGuests[value];
   return `Для ${rooms} допустимо гостей: ${validGuests.join(', ')}`;
 };
@@ -120,27 +119,11 @@ adFormElement.addEventListener('submit', (evt) => {
   }
 
   const offerData = new FormData(adFormElement);
-  togglePage(false);
-  sendData(offerData, () => {
+  const onSuccess = () => {
     adFormElement.reset();
-  });
-});
-
-submitElement.addEventListener('click', (evt) => {
-  evt.preventDefault();
-
-  const isValid = pristine.validate();
-  if (isValid) {
-    submitElement.disabled = true;
-
-    sendData(
-      () => {
-        adFormElement.reset();
-        submitElement.disabled = false;
-      },
-      new FormData(adFormElement),
-    );
-  }
+  };
+  sendData(offerData, onSuccess);
+  togglePage(false);
 });
 
 adFormElement.addEventListener('reset', () => {
