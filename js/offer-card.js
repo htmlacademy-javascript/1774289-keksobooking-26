@@ -23,8 +23,8 @@ export const generateCard = ({ offer, author } ) => {
 
   // Количество гостей и комнат
   const rooms = `${offer.rooms} ${getWordAfterNum(offer.rooms, ['комната', 'комнаты', 'комнат'])}`;
-  const guests = `${offer.guests} ${getWordAfterNum(offer.guests , ['гостя', 'гостей'])}`;
-  fillElement('.popup__text--capacity', `${rooms}  для ${guests} `);
+  const guests = `${offer.guests} ${getWordAfterNum(offer.guests, ['гостя', 'гостей'])}`;
+  fillElement('.popup__text--capacity', `${rooms} для ${guests}`);
 
   // Время заезда и выезда
   fillElement('.popup__text--time', `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`);

@@ -6,6 +6,7 @@ import {
   GuestsRange,
   offerType,
   COORD_AMOUNT,
+  OFFERS_COUNT,
   CHECKIN,
   CHECKOUT,
   FEATURES,
@@ -32,8 +33,9 @@ export const getRandomOffer = (_item, i) => {
       avatar: `img/avatars/user${formatNumberWithLeadZero(index)}.png`
     },
     offer: {
+      title: 'Объявление',
       address: `${location.lat}, ${location.lng}`,
-      description: 'This room has one sofa and a round coffee table',
+      description: 'Описание бъявления',
       price: getRandomIntInclusive(PriceRange.MIN, PriceRange.MAX),
       location,
       photos: getRandomArrayPart(PHOTOS),
@@ -42,11 +44,20 @@ export const getRandomOffer = (_item, i) => {
       guests: getRandomIntInclusive(GuestsRange.MIN, GuestsRange.MAX),
       checkin: getRandomArrayElement(CHECKIN),
       checkout: getRandomArrayElement(CHECKOUT),
-      features: getRandomArrayPart(FEATURES),
-      title: 'Пользователь'
+      features: getRandomArrayPart(FEATURES)
     },
     location
   };
 };
 
 export const getRandomOffers = (length) => Array.from({ length }, getRandomOffer);
+
+export const createMocks = (handle) =>
+  Promise.resolve(
+    Array.from(
+      {
+        length: OFFERS_COUNT
+      },
+      (_el, i) => getRandomOffer(i + 1)
+    )
+  ).then(handle);
