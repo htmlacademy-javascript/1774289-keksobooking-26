@@ -6,7 +6,7 @@ import { createMocks } from './random-offers.js';
 import { toggleMapParams } from './map-params.js';
 import { toggleParamsForm } from './ad-form.js';
 
-export let hasOffers = false;
+let hasOffers = false;
 
 const getOffers = window.location.search.includes('test') ? createMocks : getData;
 
